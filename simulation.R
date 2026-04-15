@@ -1,6 +1,3 @@
-#if not home directory, set to home 
-#setwd("/schhome/users/epstewar")
-
 #load libraries
 library(sqldf)
 library(dplyr)
