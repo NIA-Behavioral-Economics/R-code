@@ -39,7 +39,7 @@ icc_class <- 0.12
 
 #simulations
 for (i in 1:nsims) {
-  #set.seed(i)
+  set.seed(i)
   #create data (first as counts to add group level variances, will later be elongated for logistic glmer)
   subjects <- as.data.frame(cbind(1:nsub))
   subjects <- subjects %>% rename(subjectID = V1)
