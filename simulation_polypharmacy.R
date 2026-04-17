@@ -31,9 +31,9 @@ run_sim <- function(i, seed = NULL) {
   icc_prov_target   <- 0.09
   icc_clinic_target <- 0.05
   #base (control) probability 
-  pcont <- 0.01
+  pcont <- 0.05
   #tx probability
-  ptx <- 0.0149
+  ptx <- 0.068
   #within group variance for logistic
   resid_var <- (pi^2) / 3
   
@@ -93,7 +93,7 @@ run_sim <- function(i, seed = NULL) {
 	#effect on log odds scale
   beta1 <- qlogis(ptx) - qlogis(pcont)
   data$eta <- beta0_calibrated + beta1 * data$tx +
-    data$prov_re + data$clinic_re
+ 	data$prov_re + data$clinic_re
   
   #assign rows (0 vs.1) for probabilities converted from eta
   data$deprescribe <- rbinom(nrow(data), 1, plogis(data$eta))
@@ -131,7 +131,7 @@ run_sim <- function(i, seed = NULL) {
 }
 
 #this section is for parallel processing 
-nsims <- 100
+nsims <- 1000
 cl <- makeCluster(detectCores() - 1)
 
 clusterExport(cl, "run_sim")
@@ -140,7 +140,7 @@ clusterEvalQ(cl, {
   library(lme4)
 })
 
-results <- parLapply(cl, 1:nsims, run_sim)
+results <- parLapplyLB(cl, 1:nsims, run_sim)
 stopCluster(cl)
 results <- do.call(rbind, results)
 results <- as.data.frame(results)
