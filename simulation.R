@@ -25,7 +25,7 @@ ICC_unadj <- numeric(nsims)
 ### 32 classes per subject
 ### 10 people per class
 ### base control attendance rate = 0.59
-### subject ICC = 0.51, class ICC = 0.05 (specified numbers must be higher to acheive desired model ICC)
+### subject ICC = 0.51, class ICC = 0.05 (must be higher to acheive desired model ICC)
 ##### number of subjects
 nsub <- 250
 ##### number of classes
