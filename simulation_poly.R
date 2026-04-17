@@ -31,9 +31,9 @@ run_sim <- function(i, seed = NULL) {
   icc_prov_target   <- 0.09
   icc_clinic_target <- 0.05
   #base (control) probability 
-  pcont <- 0.03
+  pcont <- 0.01
   #tx probability
-  ptx <- 0.0409
+  ptx <- 0.0149
   #within group variance for logistic
   resid_var <- (pi^2) / 3
   
@@ -90,7 +90,7 @@ run_sim <- function(i, seed = NULL) {
     target_p = pcont
   )$root
   
-  #beta0 <- qlogis(pcont)
+	#effect on log odds scale
   beta1 <- qlogis(ptx) - qlogis(pcont)
   data$eta <- beta0_calibrated + beta1 * data$tx +
     data$prov_re + data$clinic_re
